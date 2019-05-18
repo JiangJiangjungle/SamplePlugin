@@ -6,20 +6,39 @@
   <name>BukkitSamplePlugin</name>
   <url>http://www.bukkit.org</url>
 
+  <properties>
+    <spigotmc.version>1.10-R0.1-SNAPSHOT</spigotmc.version>
+  </properties>
+
   <repositories>
     <repository>
-      <id>bukkit-repo</id>
-      <url>http://repo.bukkit.org/content/groups/public</url>
+      <id>spigot-repo</id>
+      <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+    </repository>
+    <!--Bungeecord Repo-->
+    <!--Only include if using the Spigot API dependency-->
+    <repository>
+      <id>bungeecord-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
   </repositories>
 
   <dependencies>
+    <!--Spigot API-->
+    <!--You only need one of the two, don't put both. Spigot is recommended.-->
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>spigot-api</artifactId>
+      <version>${spigotmc.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <!--Bukkit API-->
+    <!--You only need one of the two, don't put both. Spigot is recommended.-->
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.4.6-R0.3</version>
-      <type>jar</type>
-      <scope>compile</scope>
+      <version>${spigotmc.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -34,12 +53,13 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.0</version>
         <configuration>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>
   </build>
+
+
 </project>
