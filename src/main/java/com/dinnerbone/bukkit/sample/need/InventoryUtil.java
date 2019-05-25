@@ -18,7 +18,7 @@ public class InventoryUtil {
      */
     public static Inventory createInventory(Player player, int size, int[] slots) {
         if (inventory == null) {
-            inventory = Bukkit.createInventory(player, InventoryType.CHEST, "配件栏");
+            inventory = Bukkit.createInventory(player, size, "配件栏");
             for (int slot = 0, count = 0; slot < inventory.getSize(); slot++) {
                 if (count < slots.length && slot == slots[count]) {
                     count++;
