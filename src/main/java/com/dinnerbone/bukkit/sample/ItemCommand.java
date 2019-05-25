@@ -1,6 +1,6 @@
 package com.dinnerbone.bukkit.sample;
 
-import com.dinnerbone.bukkit.sample.need.Info;
+import com.dinnerbone.bukkit.sample.need.GunInfo;
 import com.dinnerbone.bukkit.sample.need.InfoConfig;
 import com.dinnerbone.bukkit.sample.need.ItemUtil;
 import org.bukkit.ChatColor;
@@ -20,7 +20,7 @@ public class ItemCommand implements CommandExecutor {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             ItemStack itemStack = new ItemStack(Material.IRON_BLOCK);
-            ItemUtil.setItemInfo(itemStack, new InfoConfig(), new Info());
+            ItemUtil.setGunInfo(itemStack, new InfoConfig(), new GunInfo(),10,50);
             player.getInventory().setItem(0, itemStack);
             //修改隐藏字段
             ItemUtil.setValue(itemStack, "key", "value", false);

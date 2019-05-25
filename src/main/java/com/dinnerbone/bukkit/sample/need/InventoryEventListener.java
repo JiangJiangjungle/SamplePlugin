@@ -31,7 +31,7 @@ public class InventoryEventListener implements Listener {
             }
             //todo 卸载配件
         } else {
-            //点击物品栏，若是枪械就打开配件栏，若是配件就装载或替换现有装备（同时更新枪械ItemStack的lore）
+            //todo 点击物品栏，若是枪械就打开配件栏，若是配件就装载或替换现有装备（！同时更新枪械ItemStack的lore）
         }
     }
 

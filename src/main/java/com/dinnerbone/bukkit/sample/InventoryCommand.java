@@ -7,13 +7,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InventoryCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            Inventory inventory = InventoryUtil.createInventory(player, 27,new int[]{11,13,15});
+            List<Integer> list = new ArrayList<>();
+            list.add(11);
+            list.add(13);
+            list.add(15);
+            Inventory inventory = InventoryUtil.createInventory(player, 27, list);
             player.openInventory(inventory);
             return true;
         } else {

@@ -16,29 +16,35 @@ public class ItemUtil {
     private static final char SEPARATOR = ':';
     public static final String COLOR = "§";
 
-    public static void setItemInfo(ItemStack itemStack, InfoConfig config, Info info) {
+    public static void setGunInfo(ItemStack itemStack, InfoConfig config, GunInfo gunInfo, int remainAmmo, int magazine) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-//        ChatColor.COLOR_CHAR='§'
-        itemMeta.setDisplayName(COLOR + ChatColor.GREEN.getChar() + info.getName());
+        itemMeta.setDisplayName(COLOR + ChatColor.GREEN.getChar() + gunInfo.getName());
         List<String> lores = itemMeta.getLore();
         if (lores == null) {
             lores = new LinkedList<>();
         }
-        lores.add(COLOR + ChatColor.WHITE.getChar() + info.getIntroduction());
+        lores.add(COLOR + ChatColor.GRAY.getChar() + gunInfo.getCode());
+        lores.add(COLOR + ChatColor.WHITE.getChar() + gunInfo.getIntroduction() + SEPARATOR
+                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getAmmoLabel());
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getMagazineSize() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + info.getMagazineSize());
+                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getMagazineSize());
 
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getDamage() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + info.getDamage());
+                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getDamage());
 
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getAccuracy() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + info.getAccuracy());
+                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getAccuracy());
 
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getRange() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + info.getRange());
-
-        lores.add(COLOR + ChatColor.WHITE.getChar() + config.getTip1());
-        lores.add(COLOR + ChatColor.WHITE.getChar() + config.getTip2());
+                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getRange());
+        //提示信息
+        List<String> tips = gunInfo.getTips();
+        for (String tip : tips) {
+            lores.add(COLOR + ChatColor.WHITE.getChar() + tip);
+        }
+        //todo 弹夹信息，每次开完枪都要更新。。
+        lores.add(COLOR + ChatColor.WHITE.getChar() + config.getAmmo() + SEPARATOR
+                + COLOR + ChatColor.GOLD.getChar() + remainAmmo + "/" + magazine);
         itemMeta.setLore(lores);
         itemStack.setItemMeta(itemMeta);
     }
@@ -133,7 +139,7 @@ public class ItemUtil {
         return null;
     }
 
-    public static String getBar(int number){
+    public static String getBar(int number) {
         return "";
     }
 }
