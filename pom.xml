@@ -7,7 +7,7 @@
   <url>http://www.bukkit.org</url>
 
   <properties>
-    <spigotmc.version>1.10-R0.1-SNAPSHOT</spigotmc.version>
+    <spigotmc.version>1.8.8-R0.1-SNAPSHOT</spigotmc.version>
   </properties>
 
   <repositories>
@@ -38,6 +38,14 @@
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
       <version>${spigotmc.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.6</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

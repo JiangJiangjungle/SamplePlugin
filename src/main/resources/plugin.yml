@@ -8,3 +8,9 @@ commands:
   debug:
     description: Toggles your debugging status for this plugin.
     usage: /debug
+  itm:
+    description: Toggles your debugging status for this plugin.
+    usage: /itm
+  inv:
+    description: Toggles your debugging status for this plugin.
+    usage: /inv
