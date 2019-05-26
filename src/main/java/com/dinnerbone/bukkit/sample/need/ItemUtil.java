@@ -1,5 +1,6 @@
 package com.dinnerbone.bukkit.sample.need;
 
+import com.dinnerbone.bukkit.sample.Ammo;
 import org.bukkit.ChatColor;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -16,38 +17,76 @@ public class ItemUtil {
     private static final char SEPARATOR = ':';
     public static final String COLOR = "§";
 
-    public static void setGunInfo(ItemStack itemStack, InfoConfig config, GunInfo gunInfo, int remainAmmo, int magazine) {
+    /**
+     * 初始化枪械ItemStack的信息（尚未加隐藏信息）
+     *
+     * @param itemStack
+     * @param config
+     * @param baseGun
+     * @param remainAmmo
+     * @param magazine
+     */
+    public static void initGunInfo(ItemStack itemStack, InfoConfig config, BaseGun baseGun, Buff buff, int remainAmmo, int magazine) {
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(COLOR + ChatColor.GREEN.getChar() + gunInfo.getName());
+        itemMeta.setDisplayName(COLOR + ChatColor.GREEN.getChar() + baseGun.getName());
         List<String> lores = itemMeta.getLore();
         if (lores == null) {
             lores = new LinkedList<>();
         }
-        lores.add(COLOR + ChatColor.GRAY.getChar() + gunInfo.getCode());
-        lores.add(COLOR + ChatColor.WHITE.getChar() + gunInfo.getIntroduction() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getAmmoLabel());
+        lores.add(COLOR + ChatColor.GRAY.getChar() + baseGun.getCode());
+        lores.add(COLOR + ChatColor.WHITE.getChar() + baseGun.getIntroduction() + SEPARATOR
+                + COLOR + ChatColor.GOLD.getChar() + baseGun.getAmmoLabel());
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getMagazineSize() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getMagazineSize());
-
+                + COLOR + ChatColor.GOLD.getChar() + baseGun.getMagazineSize());
+        //伤害
+        String bar = getBar(baseGun.getDamageInfo(), buff.getDamageInfo());
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getDamage() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getDamage());
-
+                + bar);
+        //精度
+        bar = getBar(baseGun.getAccuracyInfo(), buff.getAccuracyInfo());
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getAccuracy() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getAccuracy());
-
+                + bar);
+        //射程
+        bar = getBar(baseGun.getRangeInfo(), buff.getRangeInfo());
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getRange() + SEPARATOR
-                + COLOR + ChatColor.GOLD.getChar() + gunInfo.getRange());
+                + bar);
         //提示信息
-        List<String> tips = gunInfo.getTips();
+        List<String> tips = baseGun.getTips();
         for (String tip : tips) {
             lores.add(COLOR + ChatColor.WHITE.getChar() + tip);
         }
-        //todo 弹夹信息，每次开完枪都要更新。。
+        //弹夹信息
         lores.add(COLOR + ChatColor.WHITE.getChar() + config.getAmmo() + SEPARATOR
                 + COLOR + ChatColor.GOLD.getChar() + remainAmmo + "/" + magazine);
+        //todo 增加隐藏信息
         itemMeta.setLore(lores);
         itemStack.setItemMeta(itemMeta);
     }
+
+    public static void initAccessoryInfo(ItemStack itemStack, Accessory accessory) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(COLOR + ChatColor.GREEN.getChar() + accessory.getName());
+        List<String> lores = itemMeta.getLore();
+        if (lores == null) {
+            lores = new LinkedList<>();
+        }
+        //todo 隐藏信息
+        itemMeta.setLore(lores);
+        itemStack.setItemMeta(itemMeta);
+    }
+
+    public static void initAmmoInfo(ItemStack itemStack, Ammo ammo) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(COLOR + ChatColor.GREEN.getChar() + ammo.getName());
+        List<String> lores = itemMeta.getLore();
+        if (lores == null) {
+            lores = new LinkedList<>();
+        }
+        //todo 隐藏信息
+        itemMeta.setLore(lores);
+        itemStack.setItemMeta(itemMeta);
+    }
+
 
     /**
      * Hides text in color codes
@@ -94,7 +133,6 @@ public class ItemUtil {
         if (lore == null) {
             lore = new LinkedList<>();
         }
-        lore.add(hideText(key + SEPARATOR + value));
         Iterator<String> iterator = lore.iterator();
         int i = 0;
         while (iterator.hasNext()) {
@@ -139,7 +177,23 @@ public class ItemUtil {
         return null;
     }
 
-    public static String getBar(int number) {
-        return "";
+    /**
+     * 得到能力栏
+     *
+     * @param number
+     * @param add
+     * @return
+     */
+    public static String getBar(double number, double add) {
+        StringBuilder stringBuilder = new StringBuilder(4 + (int) number + (int) add);
+        stringBuilder.append(COLOR).append(ChatColor.WHITE.getChar());
+        for (int i = 0; i < number; i++) {
+            stringBuilder.append("-");
+        }
+        stringBuilder.append(COLOR).append(ChatColor.GREEN.getChar());
+        for (int i = 0; i < add; i++) {
+            stringBuilder.append("-");
+        }
+        return stringBuilder.toString();
     }
 }

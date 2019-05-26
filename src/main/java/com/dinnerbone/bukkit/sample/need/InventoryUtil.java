@@ -3,7 +3,6 @@ package com.dinnerbone.bukkit.sample.need;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -17,8 +16,8 @@ public class InventoryUtil {
      *
      * @return
      */
-    public static Inventory createInventory(Player player, int size, List<Integer> slots) {
-        Inventory inventory = Bukkit.createInventory(player, size, "配件栏");
+    public static Inventory createInventory(Player player, int size, String name,List<Integer> slots) {
+        Inventory inventory = Bukkit.createInventory(player, size, name);
         for (int slot = 0; slot < inventory.getSize(); slot++) {
             if (slots.contains(slot)) {
                 continue;

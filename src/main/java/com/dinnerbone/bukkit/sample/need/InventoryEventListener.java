@@ -1,7 +1,6 @@
 package com.dinnerbone.bukkit.sample.need;
 
 import org.bukkit.Material;
-import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;

@@ -20,7 +20,7 @@ public class InventoryCommand implements CommandExecutor {
             list.add(11);
             list.add(13);
             list.add(15);
-            Inventory inventory = InventoryUtil.createInventory(player, 27, list);
+            Inventory inventory = InventoryUtil.createInventory(player, 27, "配件栏", list);
             player.openInventory(inventory);
             return true;
         } else {

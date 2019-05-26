@@ -32,6 +32,17 @@
       <version>${spigotmc.version}</version>
       <scope>provided</scope>
     </dependency>
+
+    <!--You only need one of the two, don't put both. Spigot is recommended.-->
+    <dependency>
+      <groupId>org.spigotmc</groupId>
+      <artifactId>PaperSpigot</artifactId>
+      <version>RELEASE</version>
+      <scope>system</scope>
+      <systemPath>${basedir}/lib/PaperSpigot-1.8.8-R0.1-SNAPSHOT-latest.jar</systemPath>
+    </dependency>
+
+
     <!--Bukkit API-->
     <!--You only need one of the two, don't put both. Spigot is recommended.-->
     <dependency>
