@@ -8,7 +8,7 @@ public class Accessory {
     String code;
 
     //用于lore显示的属性值
-    Integer damageInfo;
-    Integer rangeInfo;
-    Integer accuracyInfo;
+    Integer damageInfo=3;
+    Integer rangeInfo=4;
+    Integer accuracyInfo=5;
 }

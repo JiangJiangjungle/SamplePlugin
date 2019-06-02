@@ -1,7 +1,14 @@
 package com.dinnerbone.bukkit.sample.need;
 
 import net.minecraft.server.v1_8_R3.ItemArmor;
+import org.bukkit.Location;
+
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Collection;
+import java.util.List;
 
 public class DamageUtil {
 //    static ScriptEngineManager manager = new ScriptEngineManager();

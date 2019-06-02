@@ -18,20 +18,29 @@ public class ItemCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            ItemStack itemStack = new ItemStack(Material.IRON_BLOCK);
-            ItemUtil.initGunInfo(itemStack, new InfoConfig(), new BaseGun(), new Buff(), 10, 50);
-            player.getInventory().setItem(0, itemStack);
-            //修改隐藏字段
-            ItemUtil.setValue(itemStack, "key", "value", false);
-            player.getInventory().setItem(0, itemStack);
-            System.out.println(ItemUtil.getValue(itemStack, "key"));
-            ItemUtil.setValue(itemStack, "key", "value2", false);
-            player.getInventory().setItem(0, itemStack);
-            System.out.println(ItemUtil.getValue(itemStack, "key"));
-            MessageUtil.sendMessage(player, "冲锋枪：50/100");
+            String choose = args[0];
+            if ("1".equals(choose)) {
+                ItemStack itemStack = new ItemStack(Material.IRON_BLOCK);
+                ItemUtil.initGunInfo(itemStack, new InfoConfig(), new BaseGun(), new Buff(), 10, 50);
+                player.getInventory().setItem(0, itemStack);
+                //修改隐藏字段
+                ItemUtil.setValue(itemStack, "key", "value");
+                player.getInventory().setItem(0, itemStack);
+                System.out.println("key: " + ItemUtil.getValue(itemStack, "key"));
+                ItemUtil.setValue(itemStack, "key2", "lalal");
+                ItemUtil.setValue(itemStack, "key", "value2");
+                player.getInventory().setItem(0, itemStack);
+                System.out.println("key: " + ItemUtil.getValue(itemStack, "key"));
+                System.out.println("key2: " + ItemUtil.getValue(itemStack, "key2"));
+                MessageUtil.sendMessage(player, "冲锋枪：50/100");
 
-            ItemStack[] itemStacks = player.getInventory().getArmorContents();
-            System.out.println(DamageUtil.getDamage(itemStacks));
+                ItemStack[] itemStacks = player.getInventory().getArmorContents();
+                System.out.println(DamageUtil.getDamage(itemStacks));
+            } else {
+                ItemStack itemStack = player.getInventory().getItem(0);
+                ItemUtil.updateVisiableInfo(itemStack,ItemUtil.COLOR + ChatColor.WHITE.getChar() + "伤害",
+                        ItemUtil.getBar(8,2));
+            }
             return true;
         } else {
             return false;
