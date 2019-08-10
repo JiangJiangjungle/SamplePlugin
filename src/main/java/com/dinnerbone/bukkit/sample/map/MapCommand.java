@@ -11,8 +11,6 @@ public class MapCommand implements CommandExecutor {
         int num = Integer.parseInt(args[0]);
         if (num==0) {
             MapUtil.giveMap((Player) sender);
-        } else {
-            MapUtil.refreshMap();
         }
         return true;
     }

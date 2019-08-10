@@ -29,8 +29,9 @@ public class MapListener implements Listener {
     public void onMapIteract(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack itemStack = player.getInventory().getItem(event.getNewSlot());
-        if (itemStack != null && Material.MAP == itemStack.getType()) {
-            MapUtil.refreshMap();
+        if (itemStack != null &&
+                (Material.MAP == itemStack.getType() || Material.EMPTY_MAP == itemStack.getType())) {
+            player.getInventory().setItemInHand(MapUtil.refreshMap(player));
         }
     }
 }

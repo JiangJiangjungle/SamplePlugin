@@ -3,6 +3,8 @@ package com.dinnerbone.bukkit.sample;
 
 import java.util.HashMap;
 
+import com.dinnerbone.bukkit.sample.map.MapCommand;
+import com.dinnerbone.bukkit.sample.map.MapListener;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginManager;
@@ -36,10 +38,12 @@ public class SamplePlugin extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(playerListener, this);
         pm.registerEvents(blockListener, this);
+        pm.registerEvents(new MapListener(), this);
 
         // Register our commands
         getCommand("pos").setExecutor(new SamplePosCommand());
         getCommand("debug").setExecutor(new SampleDebugCommand(this));
+        getCommand("map").setExecutor(new MapCommand());
 
         // EXAMPLE: Custom code, here we just output some info so we can check all is well
         PluginDescriptionFile pdfFile = this.getDescription();

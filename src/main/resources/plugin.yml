@@ -14,3 +14,6 @@ commands:
   inv:
     description: Toggles your debugging status for this plugin.
     usage: /inv
+  map:
+    description: Toggles your debugging status for this plugin.
+    usage: /map
